@@ -1,3 +1,3 @@
-# YOUR_REPO_NAME Ex) dc.template
+# dc.nces.colleges
 
-Allows user to easily get YOUR_DATA data from the SDAD Data Commons.  Data can be provided directly or in a file.
+Allows user to easily get access scores to 4- and 2-year colleges and trade schools data from the SDAD Data Commons.  Data can be provided directly or in a file.
