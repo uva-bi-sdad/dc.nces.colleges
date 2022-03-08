@@ -15,10 +15,10 @@ library(osrm)
 
 ################# HEALTH DISTRICTS
 # connect to database
-con <- dbConnect(PostgreSQL(), 
+con <- dbConnect(PostgreSQL(),
                  dbname = "sdad",
-                 host = "postgis1", 
-                 port = 5432, 
+                 host = "postgis1",
+                 port = 5432,
                  user = "YOUR_USERNAME",
                  password = "YOUR_PASSWORD")
 # read in health districts
@@ -28,34 +28,34 @@ health_district <- dbGetQuery(con, "SELECT * FROM dc_common.va_hdct_sdad_2021_he
 health_district$county_id <- as.character(health_district$geoid_county)
 
 ############ TRACT AND COUNTY DEMAND
-# census geographies 
+# census geographies
 # installed census api key
 readRenviron("~/.Renviron")
 Sys.getenv("CENSUS_API_KEY")
 
-# get 
+# get
 reg.tracts <- get_acs(geography = "tract",
                       year = 2019,
-                      variables = c(tpop = "B01003_001"), # tot population 
+                      variables = c(tpop = "B01003_001"), # tot population
                       state = "VA",
                       survey = "acs5",
                       output = "wide",
                       geometry = TRUE)
 
 # tract centroids
-tr_centroid <- reg.tracts %>% 
+tr_centroid <- reg.tracts %>%
   st_centroid()
 
 # get county population and shapes
 reg.counties <- get_acs(geography = "county",
                         year = 2019,
-                        variables = c(tpop = "B01003_001"), # tot population 
+                        variables = c(tpop = "B01003_001"), # tot population
                         state = "VA",
                         survey = "acs5",
                         output = "wide",
                         geometry = TRUE)
 
-ct_centroid <- reg.counties %>% 
+ct_centroid <- reg.counties %>%
   st_centroid()
 
 # Reproject
@@ -71,8 +71,8 @@ reg.ct.utm <- st_transform(reg.counties, crs = "+proj=longlat +datum=WGS84")
 #  ungroup()
 
 # convert it make to sf (I don't think this is actually necessary)
-#demand <- st_sf(geoid = demand$geoid, 
-#                #health_district = demand$region_name, 
+#demand <- st_sf(geoid = demand$geoid,
+#                #health_district = demand$region_name,
 #                tpop = demand$tpop, geometry = demand$geometry) %>%
 #  mutate(centroid = st_centroid(geometry))
 
@@ -80,9 +80,9 @@ reg.ct.utm <- st_transform(reg.counties, crs = "+proj=longlat +datum=WGS84")
 #demand$longitude = st_coordinates(demand$centroid)[,1]
 #demand$latitude = st_coordinates(demand$centroid)[,2]
 
-#demand <- tr_centroid %>% extract(geometry, c('lon', 'lat'), '\\((.*), (.*)\\)', convert = TRUE) 
+#demand <- tr_centroid %>% extract(geometry, c('lon', 'lat'), '\\((.*), (.*)\\)', convert = TRUE)
 #demand <- as.data.frame(demand)
-demand <- ct_centroid %>% extract(geometry, c('lon', 'lat'), '\\((.*), (.*)\\)', convert = TRUE) 
+demand <- ct_centroid %>% extract(geometry, c('lon', 'lat'), '\\((.*), (.*)\\)', convert = TRUE)
 demand <- as.data.frame(demand)
 
 ####################################### SUPPLY (ONE BY ONE) ########################################
@@ -103,17 +103,17 @@ supply$GEOID <- as.character(supply$GEOID)
 #  summarise(tot_cap = sum(capacity)) %>%
 #  ungroup()
 
-#save supply for the health disctrict 
+#save supply for the health disctrict
 #write_csv(new_supply, '/college_data/less_two_hd_newsupply.csv')
 
 ####################################### DRIVING TIME ############################################
 # options for OSRM
-options(osrm.server = "http://104.248.112.16:5000/", osrm.profile = "car")
+options(osrm.server = Sys.getenv("OSRM_SERVER"), osrm.profile = "car")
 
 start.time <- Sys.time() # using this to see run-time
 all_data <- matrix(, nrow = 0, ncol = nrow(supply))
 
-# maximum number of requests that OSRM can handle at a time - 
+# maximum number of requests that OSRM can handle at a time -
 # I don't know if there is still a limit on this, but I still use 1 million as the upper bound
 max.size <- 100
 
@@ -134,7 +134,7 @@ for (i in 1 : chunks)
   {
     #matrix <- osrmTable(src = demand[(1 + n * (i - 1)):nrow(demand), c("geoid_bg", "closest_property_lon", "closest_property_lat")],
     #                    dst = new_supply[, c("GEOID", "lon", "lat")])$durations
-    
+
     matrix <- osrmTable(src = demand[(1 + n * (i - 1)):nrow(demand), c("GEOID", "lon", "lat")],
                         dst = supply[, c("GEOID", "lon", "lat")])$durations
   }
