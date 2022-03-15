@@ -1,0 +1,53 @@
+{
+  "name": "dc.nces.colleges",
+  "data": [
+    {
+      "name": "2year_colleges_access_scores",
+      "variables": ["3sfca_capacity", "2sfca30_capacity", "norm_3sfca", "norm_2sfca", "college_capacity", "perc_3sfca", "perc_2sfca30", "2sefca30_tot_enrol", "norm_2sefca", "perc_2sefca", "3sfca_tot_enrol", "capacity"],
+      "file": "va_cttrhd_sdad_2019_2year_colleges_access_scores.csv.xz",
+      "size": 86120,
+      "md5": "eac92afdd12f9b468af9eb0f933c335a"
+    },
+    {
+      "name": "4year_colleges_access_scores",
+      "variables": ["3sfca_capacity", "2sfca30_capacity", "norm_3sfca", "norm_2sfca", "college_capacity", "perc_3sfca", "perc_2sfca30", "2sefca30_tot_enrol", "norm_2sefca", "perc_2sefca", "3sfca_tot_enrol", "capacity"],
+      "file": "va_cttrhd_sdad_2019_4year_colleges_access_scores.csv.xz",
+      "size": 97460,
+      "md5": "249e6be52bcde368fa6948856aa6798b"
+    },
+    {
+      "name": "trade_schools_access_scores",
+      "variables": ["3sfca_capacity", "2sfca30_capacity", "norm_3sfca", "norm_2sfca", "college_capacity", "perc_3sfca", "perc_2sfca30", "2sefca30_tot_enrol", "norm_2sefca", "perc_2sefca", "3sfca_tot_enrol", "capacity"],
+      "file": "va_cttrhd_sdad_2019_trade_schools_access_scores.csv.xz",
+      "size": 79728,
+      "md5": "72f23dbc23e77070ee71d62f74c94d8d"
+    }
+  ],
+  "distributions": {
+    "dataverse": {
+      "id": 55965,
+      "doi": "doi:10.18130/V3/IWQFZC",
+      "server": "https://dataverse.lib.virginia.edu/",
+      "data": [
+        {
+          "file": "va_cttrhd_sdad_2019_2year_colleges_access_scores.csv.xz",
+          "id": 55966,
+          "size": 86120,
+          "md5": "eac92afdd12f9b468af9eb0f933c335a"
+        },
+        {
+          "file": "va_cttrhd_sdad_2019_4year_colleges_access_scores.csv.xz",
+          "id": 55967,
+          "size": 97460,
+          "md5": "249e6be52bcde368fa6948856aa6798b"
+        },
+        {
+          "file": "va_cttrhd_sdad_2019_trade_schools_access_scores.csv.xz",
+          "id": 55968,
+          "size": 79728,
+          "md5": "72f23dbc23e77070ee71d62f74c94d8d"
+        }
+      ]
+    }
+  }
+}
