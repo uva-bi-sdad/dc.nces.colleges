@@ -28,6 +28,7 @@ dataset:
       - "State Health District"
       - "County"
       - "Census tract"
+      - "Census block group"
 ---
 
 ```{r setup, include=FALSE}
