@@ -10,6 +10,7 @@
     "short_description": "Index of 3-year college accessibility based on supply and demand of providers",
     "long_description": "2-year college access score based on 3-step floating catchment areas. This method is an aggregation of college capacity per population ratios weighted by distance or travel time in each catchment area (area within which an institution is accessible). Weights are defined for the demand for 2-year college (whole population in an area served by the institution) and supply is the total number of students enrolled in a year (graduate and undergraduate).",
     "statement": "The 2-year college accessibility score for {features.name} is {value}.",
+    "equity_category" : "Accessibility",
     "citations": [
       "lou04",
       "lou09",
@@ -41,6 +42,7 @@
     "short_description": "Index of trade school accessibility based on supply and demand of providers",
     "long_description": "Trade school access score based on 3-step floating catchment areas. This method is an aggregation of trade school capacity per population ratios weighted by distance or travel time in each catchment area (area within which an institution is accessible). Weights are defined for the demand for trade schools (whole population in an area served by the institution) and supply is the total number of students enrolled in a year (undergraduate).",
     "statement": "The trade school accessibility score for {features.name} is {value}.",
+    "equity_category" : "Accessibility",
     "citations": [
       "lou04",
       "lou09",
